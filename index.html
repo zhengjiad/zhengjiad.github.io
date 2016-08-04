@@ -57,17 +57,17 @@
     
     <div class="article-meta">
       <a href="/2016/08/05/SpringJDBC/" class="article-date">
-  <time datetime="2016-08-04T16:06:38.434Z" itemprop="datePublished">2016-08-05</time>
+  <time datetime="2016-08-04T16:14:03.125Z" itemprop="datePublished">2016-08-05</time>
 </a>
       
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#SpringJDBC</p>
-<p>##配置JDBC</p>
-<p>###配置Jar包<br>druid-jar</p>
-<p>###配置xml文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;context:annotation-config/&gt;</div><div class="line">    &lt;context:component-scan base-package=&quot;com.shxt&quot;/&gt;</div><div class="line">    &lt;aop:aspectj-autoproxy proxy-target-class=&quot;true&quot;/&gt;</div><div class="line">    &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;</div><div class="line">    &lt;!-- 数据源 --&gt;</div><div class="line">    &lt;bean id=&quot;druidDataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; destroy-method=&quot;close&quot;&gt;</div><div class="line">        &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;shxt.driver&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;url&quot; value=&quot;$&#123;shxt.url&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;$&#123;shxt.username&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;shxt.password&#125;&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!-- JDBCTEMPLATE --&gt;</div><div class="line">    &lt;bean id=&quot;jdbcTemplate&quot; class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</div><div class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;druidDataSource&quot;&gt;&lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div></pre></td></tr></table></figure></p>
+        <p>#SpringJDBC#</p>
+<p>##配置JDBC##</p>
+<p>###配置Jar包###<br>druid-jar</p>
+<p>###配置xml文件###<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;context:annotation-config/&gt;</div><div class="line">    &lt;context:component-scan base-package=&quot;com.shxt&quot;/&gt;</div><div class="line">    &lt;aop:aspectj-autoproxy proxy-target-class=&quot;true&quot;/&gt;</div><div class="line">    &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;</div><div class="line">    &lt;!-- 数据源 --&gt;</div><div class="line">    &lt;bean id=&quot;druidDataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; destroy-method=&quot;close&quot;&gt;</div><div class="line">        &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;shxt.driver&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;url&quot; value=&quot;$&#123;shxt.url&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;username&quot; value=&quot;$&#123;shxt.username&#125;&quot;/&gt;</div><div class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;shxt.password&#125;&quot;/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!-- JDBCTEMPLATE --&gt;</div><div class="line">    &lt;bean id=&quot;jdbcTemplate&quot; class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</div><div class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;druidDataSource&quot;&gt;&lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div></pre></td></tr></table></figure></p>
 
       
     </div>
