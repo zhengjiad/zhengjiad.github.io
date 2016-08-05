@@ -3,14 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>郑佳</title>
+  <title>事务 - 郑佳</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="郑佳">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="事务事务的配置注解配置1234567891011121314151617181920212223242526272829&amp;lt;!-- 启动Spring注解 --&amp;gt;   &amp;lt;context:annotation-config/&amp;gt;   &amp;lt;!-- 扫描 --&amp;gt;   &amp;lt;context:component-scan base-package=&amp;quot;com.shxt&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="事务">
+<meta property="og:url" content="http://yoursite.com/2016/08/05/事务/index.html">
 <meta property="og:site_name" content="郑佳">
+<meta property="og:description" content="事务事务的配置注解配置1234567891011121314151617181920212223242526272829&amp;lt;!-- 启动Spring注解 --&amp;gt;   &amp;lt;context:annotation-config/&amp;gt;   &amp;lt;!-- 扫描 --&amp;gt;   &amp;lt;context:component-scan base-package=&amp;quot;com.shxt&amp;">
+<meta property="og:image" content="https://dn-raysnote.qbox.me/p%2Fnotes%2F292b4b1cb21e54c">
+<meta property="og:image" content="https://dn-raysnote.qbox.me/p%2Fnotes%2Fde5b8613ab0167d">
+<meta property="og:updated_time" content="2016-08-05T10:11:39.257Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="郑佳">
+<meta name="twitter:title" content="事务">
+<meta name="twitter:description" content="事务事务的配置注解配置1234567891011121314151617181920212223242526272829&amp;lt;!-- 启动Spring注解 --&amp;gt;   &amp;lt;context:annotation-config/&amp;gt;   &amp;lt;!-- 扫描 --&amp;gt;   &amp;lt;context:component-scan base-package=&amp;quot;com.shxt&amp;">
+<meta name="twitter:image" content="https://dn-raysnote.qbox.me/p%2Fnotes%2F292b4b1cb21e54c">
   
   
     <link rel="icon" href="/favicon.png">
@@ -50,16 +57,15 @@
     </div>
   </div>
 </header>
-    <section id="main" class="outer">
-      <article id="post-事务" class="article article-type-post" itemscope itemprop="blogPost">
+    <section id="main" class="outer"><article id="post-事务" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/05/事务/">事务</a>
+    <h1 class="article-title" itemprop="name">
+      事务
     </h1>
   
 
@@ -94,138 +100,26 @@
     </div>
     
     
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-springJDBC" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+      <footer class="article-footer">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/05/springJDBC/">Spring mvc</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/08/05/springJDBC/" class="article-date">
-  <time datetime="2016-08-05T08:01:53.322Z" itemprop="datePublished">2016-08-05</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="配置JDBC"><a href="#配置JDBC" class="headerlink" title="配置JDBC"></a>配置JDBC</h2><h3 id="配置JAR包"><a href="#配置JAR包" class="headerlink" title="配置JAR包"></a>配置JAR包</h3><p>jar包为druid.jar</p>
-<h3 id="配置xml文件"><a href="#配置xml文件" class="headerlink" title="配置xml文件"></a>配置xml文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">&lt;context:annotation-config/&gt;</div><div class="line">    &lt;context:component-scan base-package=<span class="string">"com.shxt"</span>/&gt;</div><div class="line">    &lt;aop:aspectj-autoproxy proxy-target-class=<span class="string">"true"</span>/&gt;</div><div class="line">    &lt;context:property-placeholder location=<span class="string">"classpath:jdbc.properties"</span>/&gt;</div><div class="line">    &lt;!-- 数据源 --&gt;</div><div class="line">    &lt;bean id=<span class="string">"druidDataSource"</span> class=<span class="string">"com.alibaba.druid.pool.DruidDataSource"</span> destroy-method=<span class="string">"close"</span>&gt;</div><div class="line">        &lt;property name=<span class="string">"driverClassName"</span> value=<span class="string">"<span class="variable">$&#123;shxt.driver&#125;</span>"</span>/&gt;</div><div class="line">        &lt;property name=<span class="string">"url"</span> value=<span class="string">"<span class="variable">$&#123;shxt.url&#125;</span>"</span>/&gt;</div><div class="line">        &lt;property name=<span class="string">"username"</span> value=<span class="string">"<span class="variable">$&#123;shxt.username&#125;</span>"</span>/&gt;</div><div class="line">        &lt;property name=<span class="string">"password"</span> value=<span class="string">"<span class="variable">$&#123;shxt.password&#125;</span>"</span>/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!-- JDBCTEMPLATE --&gt;</div><div class="line">    &lt;bean id=<span class="string">"jdbcTemplate"</span> class=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</div><div class="line">        &lt;property name=<span class="string">"dataSource"</span> ref=<span class="string">"druidDataSource"</span>&gt;&lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div></pre></td></tr></table></figure>
-<h2 id="调用jdbcTemplate"><a href="#调用jdbcTemplate" class="headerlink" title="调用jdbcTemplate"></a>调用jdbcTemplate</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">@Autowired</div><div class="line">   private JdbcTemplate jdbcTemplate;</div><div class="line">   /* (方法重写)</div><div class="line">    * @see com.shxt.dao.UserDao<span class="comment">#ListMap()</span></div><div class="line">    */</div><div class="line">   @Override</div><div class="line">   public List&lt;Map&lt;String, Object&gt;&gt; <span class="function"><span class="title">ListMap</span></span>() &#123;</div><div class="line">       <span class="built_in">return</span> jdbcTemplate.queryForList(SQL);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   /* (方法重写)</div><div class="line">    * @see com.shxt.dao.UserDao<span class="comment">#listUserALL()</span></div><div class="line">    */</div><div class="line">   @Override</div><div class="line">   public List&lt;SysUser&gt; <span class="function"><span class="title">listUserALL</span></span>() &#123;</div><div class="line">       <span class="built_in">return</span> jdbcTemplate.query(SQL, new BeanPropertyRowMapper&lt;SysUser&gt;(SysUser.class));</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<hr>
-<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><ul>
-<li>事务管理是企业级应用程序开发中必不可少的技术,  用来确保数据的完整性和一致性. </li>
-<li>事务就是一系列的动作, 它们被当做一个单独的工作单元. 这些动作要么全部完成, 要么全部不起作用</li>
-<li>事务的四个关键属性(ACID)</li>
-</ul>
-<ol>
-<li>原子性(atomicity): 事务是一个原子操作, 由一系列动作组成. 事务的原子性确保动作要么全部完成要么完全不起作用.</li>
-<li>一致性(consistency): 一旦所有事务动作完成, 事务就被提交. 数据和资源就处于一种满足业务规则的一致性状态中.</li>
-<li>隔离性(isolation): 可能有许多事务会同时处理相同的数据, 因此每个事物都应该与其他事务隔离开来, 防止数据损坏.</li>
-<li>持久性(durability): 一旦事务完成, 无论发生什么系统错误, 它的结果都不应该受到影响. 通常情况下, 事务的结果被写到持久化存储器中.</li>
-</ol>
-
-      
-    </div>
-    
+      </footer>
     
   </div>
   
-</article>
-
-
     
-      <article id="post-new-article" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/02/new-article/">new article</a>
-    </h1>
   
+    <a href="/2016/08/05/springJDBC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Spring mvc&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/08/02/new-article/" class="article-date">
-  <time datetime="2016-08-02T15:00:37.000Z" itemprop="datePublished">2016-08-02</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    
-  </div>
   
 </article>
 
-
-    
-      <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/02/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      <a href="/2016/08/02/hello-world/" class="article-date">
-  <time datetime="2016-08-02T12:23:58.261Z" itemprop="datePublished">2016-08-02</time>
-</a>
-      
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    
-    
-  </div>
-  
-</article>
-
-
-    </section>
+</section>
     <footer id="footer">
   
   <div class="outer">
