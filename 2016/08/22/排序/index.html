@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>排序 - 郑佳</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基本概念
+排序：按照一定的关键字，将一个序列排列成一个想要得到的新序列。
+内部排序和外部排序：整个排序过程完全在内存在进行，叫做内部排序。数据量较大需要借助外部存储设备才能完成，叫做外部 排序。
+主关键字和次关键字：
+排序的稳定性：对于相同的元素来说，在排序之前和之后的记录是一样的，那么就是一种稳定的排序，如果顺序发生变化就是不稳定的排序。 插入类排序思想：在一个已经排序好的序列中，将未被排进的元">
+<meta property="og:type" content="article">
+<meta property="og:title" content="排序">
+<meta property="og:url" content="http://yoursite.com/2016/08/22/排序/index.html">
+<meta property="og:site_name" content="郑佳">
+<meta property="og:description" content="基本概念
+排序：按照一定的关键字，将一个序列排列成一个想要得到的新序列。
+内部排序和外部排序：整个排序过程完全在内存在进行，叫做内部排序。数据量较大需要借助外部存储设备才能完成，叫做外部 排序。
+主关键字和次关键字：
+排序的稳定性：对于相同的元素来说，在排序之前和之后的记录是一样的，那么就是一种稳定的排序，如果顺序发生变化就是不稳定的排序。 插入类排序思想：在一个已经排序好的序列中，将未被排进的元">
+<meta property="og:updated_time" content="2016-08-23T07:18:36.979Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="排序">
+<meta name="twitter:description" content="基本概念
+排序：按照一定的关键字，将一个序列排列成一个想要得到的新序列。
+内部排序和外部排序：整个排序过程完全在内存在进行，叫做内部排序。数据量较大需要借助外部存储设备才能完成，叫做外部 排序。
+主关键字和次关键字：
+排序的稳定性：对于相同的元素来说，在排序之前和之后的记录是一样的，那么就是一种稳定的排序，如果顺序发生变化就是不稳定的排序。 插入类排序思想：在一个已经排序好的序列中，将未被排进的元">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+  <link href="/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-outer" class="outer">
+    <div id="header-inner" class="inner">
+      <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+      <a id="logo" class="logo" href="/"></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div id="search-form-wrap">
+          <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+    <section id="main" class="outer"><article id="post-排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      排序
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      <a href="/2016/08/22/排序/" class="article-date">
+  <time datetime="2016-08-22T10:59:35.000Z" itemprop="datePublished">2016-08-22</time>
+</a>
+      
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ol>
+<li>排序：按照一定的关键字，将一个序列排列成一个想要得到的新序列。</li>
+<li>内部排序和外部排序：整个排序过程完全在内存在进行，叫做内部排序。数据量较大需要借助外部存储设备才能完成，叫做外部 排序。</li>
+<li>主关键字和次关键字：</li>
+<li>排序的稳定性：对于相同的元素来说，在排序之前和之后的记录是一样的，那么就是一种稳定的排序，如果顺序发生变化就是不稳定的排序。 <h3 id="插入类排序"><a href="#插入类排序" class="headerlink" title="插入类排序"></a>插入类排序</h3>思想：在一个已经排序好的序列中，将未被排进的元素按照原来的的规定插入到制定位置。<br>分类：<br>直接插入排序：</li>
+<li>思想：最基本的插入排序，将第i个插入到前i-1个中的适当位置。</li>
+<li>时间复杂度：T(n)=O(n^2)</li>
+<li>空间复杂度：S(n)=O(1)</li>
+<li>稳定性：稳定排序。 循环条件while(r[0].key&lt; r[j].key)保证。</li>
+<li>程序：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">void InsSort(RecordType r[], int length)  </div><div class="line">&#123;  </div><div class="line">    for(i = 2; i &lt;= length; i++)  </div><div class="line">    &#123;  </div><div class="line">        r[0] = r[i];  </div><div class="line">        j = i – 1;  </div><div class="line">        while(r[0].key &lt; r[j].key)  </div><div class="line">        &#123;  </div><div class="line">            r[j + 1] = r[j]; j = j – 1;  </div><div class="line">        &#125;  </div><div class="line">        r[j+1] = r[0];  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>折半插入排序</p>
+<ol>
+<li>思想：因为已经确定了前半部分是有序序列，所以在查找插入位置的时候可以用折半查找的方法进行查找，提高效率。</li>
+<li>时间复杂：比较时的时间减为O(nlogn)，但是移动元素的时间耗费未变，所以总的时间复杂度还是O(n^2)。</li>
+<li>空间复杂度：S(n)=O(1)。</li>
+<li>稳定性：稳定排序。</li>
+<li>程序：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">void BinSort(RecordType r[], int length)  </div><div class="line">&#123;  </div><div class="line">    for(i = 2; i &lt;= length; i++)  </div><div class="line">    &#123;  </div><div class="line">        x = r[i];  </div><div class="line">        low = 1; high = i – 1;  </div><div class="line">        while(low &lt;= high)  </div><div class="line">        &#123;  </div><div class="line">            mid = (low + high) / 2;  </div><div class="line">            if(x.key &lt; r[mid].key)  </div><div class="line">                high = mid – 1;  </div><div class="line">            else  </div><div class="line">                low = mid – 1;  </div><div class="line">        &#125;  </div><div class="line">        for(j = i – 1; j &gt;= low; --j)  </div><div class="line">            r[j + 1] = r[j];  </div><div class="line">        r[low] = x;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>希尔排序</p>
+<ol>
+<li>思想：又称缩小增量排序法。把待排序序列分成若干较小的子序列，然后逐个使用直接插入排序法排序，最后再对一个较为有序的序列进行一次排序，主要是为了减少移动的次数，提高效率。原理应该就是从无序到渐渐有序，要比直接从无序到有序移动的次数少一点。</li>
+<li>时间复杂度：O(n^1.5)</li>
+<li>空间复杂度：O(1)</li>
+<li>稳定性：不稳定排序。{2,4,1,2}，2和1一组，4和2一组，进行希尔排序，第一个2和最后一个2会发生位置上的变化。</li>
+<li>程序：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">void ShellInsert(RecordType r[], int length, int delta)  </div><div class="line">&#123;  </div><div class="line">    for(i = 1 + delta; i &lt;= length; i++)/*1+delta为第一个子序列的第二个元素的下表*/  </div><div class="line">    if(r[i].key &lt; r[1 - delta].key)  </div><div class="line">    &#123;  </div><div class="line">        r[0] = r[i];  </div><div class="line">        for(j = i – delta; j &gt; 0 &amp;&amp; r[0].key &lt; r[j].key; j -=delta)  </div><div class="line">            r[j + delta] = r[j];  </div><div class="line">        r[j + delta] = r[0];  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">void ShellSort(RecordType r[], int length, int delta[], int n)  </div><div class="line">&#123;  </div><div class="line">    for(i = 0; i &lt;= n – 1; ++i)  </div><div class="line">        ShellInsert(r, length, delta[i]);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="交换类排序"><a href="#交换类排序" class="headerlink" title="交换类排序"></a>交换类排序</h3><p>思想：通过交换逆序元素进行排序的方法<br>分类：<br>冒泡排序：</p>
+<ol>
+<li>思想：反复扫描待排序序列，在扫描过程中顺序比较相邻的两个元素的大小，若逆序就交换顺序，第一遍，从第一个数据开始，比较相邻的两个数据，（以升序为例）如果大就交换，得到最大的数据在末尾，然后进行第二趟，只扫描前n-1个元素，得到次大的放在倒数第二位。以此类推，最后得到升序序列。如果在扫描过程中，发现没有交换，说明已经排好序列，直接终止扫描。所以最多进行n-1次遍历。</li>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(1)</li>
+<li>稳定性：稳定排序</li>
+<li>程序：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">void BubbleSort(RecordType r[], int length)  </div><div class="line">&#123;  </div><div class="line">    n = length;  </div><div class="line">    change = TRUE;  </div><div class="line">    for(i = 1; i &lt;= n – 1 &amp;&amp; change; i++)  </div><div class="line">    &#123;  </div><div class="line">        change = FALSE;  </div><div class="line">        for(j = 1; j &lt;= n – I; ++j)  </div><div class="line">            if(r[j].key &gt; r[j + 1].key)  </div><div class="line">            &#123;  </div><div class="line">                x = r[j];  </div><div class="line">                r[j] = r[j + 1];  </div><div class="line">                r[j + 1] = x;  </div><div class="line">                change = TRUE;  </div><div class="line">             &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>快速排序</p>
+<ol>
+<li>思想：冒泡排序一次只能消除一个逆序 ，为了能一次消除多个逆序，采用快速排序。以一个关键字为轴，从左至右依次进行对比，然后交换，第一趟结束后，可以把序列分为两个子序列，然后再分段进行快速排序，达到高效。</li>
+<li>时间复杂度：平均O(nlogn)，最坏O(n^2)</li>
+<li>空间复杂度：O(nlogn)</li>
+<li>稳定性：不稳定排序。{3,2,2}</li>
+<li>程序：</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">void QKSort(RecordType r[], int low, int high)  </div><div class="line">&#123;  </div><div class="line">    int pos;  </div><div class="line">    if(low &lt; high)  </div><div class="line">    &#123;  </div><div class="line">        pos = QKPass(r, low, high);  </div><div class="line">        QKSort(r, low, pos - 1);  </div><div class="line">        QKSort(r, pos + 1, high);  </div><div class="line">    &#125;  </div><div class="line">&#125;  </div><div class="line">int QKPass(RecordType r[], int left, int right)  </div><div class="line">&#123;  </div><div class="line">    RecordType x;  </div><div class="line">    int low, high;  </div><div class="line">    x = r[left];  </div><div class="line">    low = left;  </div><div class="line">    high = right;  </div><div class="line">    while(low &lt; high)  </div><div class="line">    &#123;  </div><div class="line">        while(low &lt; high &amp;&amp; r[high].key &gt;= x.key)  </div><div class="line">            high--;  </div><div class="line">        if(low &lt; high)  </div><div class="line">        &#123;  </div><div class="line">            r[low] = r[high];  </div><div class="line">            low++;  </div><div class="line">        &#125;  </div><div class="line">        while(low &lt; high &amp;&amp; r[low].key &lt; x.key)  </div><div class="line">            low++;  </div><div class="line">        if(low &lt; high)  </div><div class="line">        &#123;  </div><div class="line">            r[high] = r[low];  </div><div class="line">            high--;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">    r[low] = x;  </div><div class="line">    return low;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+      <footer class="article-footer">
+        
+      </footer>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/22/tomcat目录结构/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">tomcat目录结构&nbsp;<span>&gt;</span></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe&nbsp;
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+  </div>
+</body>
+</html>
