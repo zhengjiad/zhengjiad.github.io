@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="null">
+    <meta name="keyword"  content="undefined">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#60090">
+    <link rel="shortcut icon" href="/img/coffee.png">
+
+    <title>
+        
+          spring入门｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/2016/08/07/spring入门/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+
+    <!-- Custom Fonts -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<style>
+
+    header.intro-header{
+        background-image: url('undefined')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <span class="brand-logo">
+                    旅程
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                        
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!--only post-->
+
+    
+        <img class="wechat-title-img" src="">
+    
+
+<style>
+
+    header.intro-header{
+        background-image: url('')
+    }
+
+</style>
+
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>spring入门</h1>
+                    
+                    <span class="meta">
+                         作者 
+                         <span>
+                          日期 2016-08-07
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            spring入门
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+                <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+
+                <h1 id="spring入门"><a href="#spring入门" class="headerlink" title="spring入门"></a>spring入门</h1><h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><ul>
+<li>AOP面向切面编程（Aspect-Oriented Programming）:是一种新的方法论，是对传统OPP面向对象编程的补充。</li>
+<li>AOP的主要编程对象是切面。</li>
+<li>AOP的好处：<ol>
+<li>每个事物逻辑位于一个位置，代码不分散，便于维护和升级</li>
+<li>业务模块更加简洁，只包含核心业务代码。</li>
+</ol>
+</li>
+</ul>
+<p>AOP叫做面向切面编程，顾名思义它是在核心代码的外层包裹上一层新的代码，通过这层代码对核心代码进行扩展。</p>
+<h3 id="AOP的配置以及JAR包"><a href="#AOP的配置以及JAR包" class="headerlink" title="AOP的配置以及JAR包"></a>AOP的配置以及JAR包</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">&lt;!-- 启动注解 --&gt;</div><div class="line">   &lt;context:annotation-config/&gt;</div><div class="line">   &lt;!-- 启动扫描 --&gt;</div><div class="line">   &lt;context:component-scan base-package=<span class="string">"com.shxt"</span>/&gt;</div><div class="line">   &lt;!-- 启动AOP注释 --&gt;</div><div class="line">   &lt;aop:aspectj-autoproxy proxy-target-class=<span class="string">"true"</span>/&gt;</div><div class="line">   </div><div class="line">   &lt;bean id=<span class="string">"loggerAspect"</span> class=<span class="string">"com.shxt.aspect.LoggerAspect"</span>/&gt;</div><div class="line">   </div><div class="line">   &lt;!-- 配置AOP --&gt;</div><div class="line">   &lt;aop:config&gt;</div><div class="line">       &lt;!-- 切面 --&gt;</div><div class="line">       &lt;aop:aspect id=<span class="string">"methodAspect"</span> ref=<span class="string">"loggerAspect"</span>&gt;</div><div class="line">           &lt;!-- @pointcut --&gt;</div><div class="line">           &lt;aop:pointcut expression=<span class="string">"execution(* com..*Service.*(..)) and !execution(* com..*Service.sub(..))"</span> id=<span class="string">"methodPointCut"</span>/&gt;</div><div class="line">           &lt;!-- @Before --&gt;</div><div class="line">           &lt;aop:before method=<span class="string">"前置通知_无论程序是否正确_一直执行"</span> pointcut-ref=<span class="string">"methodPointCut"</span>/&gt;</div><div class="line">           &lt;!-- @AfterRuturning --&gt;</div><div class="line">           &lt;aop:after-returning method=<span class="string">"返回通知_只有程序正常执行后"</span> returning=<span class="string">"shxt"</span> pointcut-ref=<span class="string">"methodPointCut"</span>/&gt;</div><div class="line">       &lt;/aop:aspect&gt;</div><div class="line">   &lt;/aop:config&gt;</div></pre></td></tr></table></figure>
+<h3 id="AOP代码示例"><a href="#AOP代码示例" class="headerlink" title="AOP代码示例"></a>AOP代码示例</h3><figure class="highlight"><table><tr><td class="code"><pre><div class="line">@Pointcut("addPointCut() || subPointCut()")</div><div class="line">  public void addAndsub() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Pointcut("execution(int com..*Service.add(int,int))")</div><div class="line">  public void addPointCut() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Pointcut("execution(int com..*Service.div(int,int))")</div><div class="line">  public void divPointCut() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Pointcut("execution(int com..*Service.mul(int,int))")</div><div class="line">  public void mulPointCut() &#123;</div><div class="line">  &#125;</div><div class="line">  @Pointcut("execution(int com..*Service.sub(int,int))")</div><div class="line">  public void subPointCut() &#123;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"> @AfterReturning(value = "mulPointCut()", returning = "shxt")</div><div class="line">  public void 返回通知_只有程序正常执行后(JoinPoint joinPoint, Object shxt) &#123;</div><div class="line">      System.out.println("返回通知_只有程序正常执行后--" + shxt);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @After("subPointCut()")</div><div class="line">  public void 后置通知_无论程序是否正确_一直执行(JoinPoint joinPoint) &#123;</div><div class="line">      System.out.println("后置通知_无论程序是否正确_一直执行");</div><div class="line">  &#125;</div><div class="line">  @Before("addPointCut()")</div><div class="line">  public void 前置通知_无论程序是否正确_一直执行(JoinPoint joinPoint) &#123;</div><div class="line"></div><div class="line">      System.out.println("前置通知_无论程序是否正确_一直执行");</div><div class="line">      System.out.println(":" + joinPoint.getKind());</div><div class="line">      System.out.println(":" + joinPoint.getTarget().getClass().getName());</div><div class="line">      System.out.println("传递的参数:" + Arrays.asList(joinPoint.getArgs()));</div><div class="line">      System.out.println(":" + joinPoint.getSignature().getName());</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @AfterThrowing(value = "divPointCut()", throwing = "xy17")</div><div class="line">  public void 异常通知_只有出现异常的时候_执行(JoinPoint joinPoint, Exception xy17) &#123;</div><div class="line">      System.out.println("异常通知_只有出现异常的时候_执行---" + xy17);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/08/10/实例化对象的5种方式/" data-toggle="tooltip" data-placement="top" title="实例化对象的5种方式">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/08/05/事务/" data-toggle="tooltip" data-placement="top" title="事务">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col" >
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#spring入门"><span class="toc-text">spring入门</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AOP"><span class="toc-text">AOP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#AOP的配置以及JAR包"><span class="toc-text">AOP的配置以及JAR包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#AOP代码示例"><span class="toc-text">AOP代码示例</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                <h5 class="text-center">
+                    <a href="/tags/">FEATURED TAGS</a>
+                </h5>
+                    <div class="tags">
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <span class="text-muted"style="font-size: 14px">双击导航条返回顶部</span>
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 旅程 2016
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','undefined','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="null">
+</body>
+
+</html>
