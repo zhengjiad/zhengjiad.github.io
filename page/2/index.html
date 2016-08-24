@@ -238,6 +238,315 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/05/事务/" itemprop="url">
+                  事务
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-08-05T16:05:57+08:00" content="2016-08-05">
+              2016-08-05
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><h2 id="事务的配置"><a href="#事务的配置" class="headerlink" title="事务的配置"></a>事务的配置</h2><h3 id="注解配置"><a href="#注解配置" class="headerlink" title="注解配置"></a>注解配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;!-- 启动Spring注解 --&gt;</div><div class="line">   &lt;context:annotation-config/&gt;</div><div class="line">   &lt;!-- 扫描 --&gt;</div><div class="line">   &lt;context:component-scan base-package=&quot;com.shxt&quot;/&gt;</div><div class="line">   &lt;!-- aop代理 --&gt;</div><div class="line">   &lt;aop:aspectj-autoproxy proxy-target-class=&quot;true&quot;/&gt;</div><div class="line"></div><div class="line">   &lt;!-- 读取属性文件 激活$&#123;...&#125;--&gt;</div><div class="line">   &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;</div><div class="line">   </div><div class="line">   &lt;!-- 数据源 --&gt;</div><div class="line">   &lt;bean id=&quot;druidDataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; destroy-method=&quot;close&quot;&gt;</div><div class="line">       &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;shxt.driver&#125;&quot;/&gt;</div><div class="line">       &lt;property name=&quot;url&quot; value=&quot;$&#123;shxt.url&#125;&quot;/&gt;</div><div class="line">       &lt;property name=&quot;username&quot; value=&quot;$&#123;shxt.username&#125;&quot;/&gt;</div><div class="line">       &lt;property name=&quot;password&quot; value=&quot;$&#123;shxt.password&#125;&quot;/&gt;</div><div class="line">   &lt;/bean&gt;</div><div class="line">   </div><div class="line">   &lt;!-- JdbcTemplate --&gt;</div><div class="line">   &lt;bean id=&quot;jdbcTemplate&quot; class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</div><div class="line">       &lt;property name=&quot;dataSource&quot; ref=&quot;druidDataSource&quot;/&gt;</div><div class="line">   &lt;/bean&gt;</div><div class="line"></div><div class="line">   &lt;!-- 配置事务管理器 --&gt;</div><div class="line">   &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</div><div class="line">       &lt;property name=&quot;dataSource&quot; ref=&quot;druidDataSource&quot;/&gt;</div><div class="line">   &lt;/bean&gt;</div><div class="line">   &lt;!-- 启动事务注解 --&gt;</div><div class="line">   &lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot; proxy-target-class=&quot;true&quot;/&gt;</div></pre></td></tr></table></figure>
+<h3 id="xml配置"><a href="#xml配置" class="headerlink" title="xml配置"></a>xml配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;!-- 事务管理器 --&gt;</div><div class="line">   &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</div><div class="line">       &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;</div><div class="line">   &lt;/bean&gt;</div><div class="line">   </div><div class="line">   &lt;!-- 通知事务管理器，需要监控的方式 --&gt;</div><div class="line">   &lt;tx:advice id=&quot;methodAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;</div><div class="line">       &lt;tx:attributes&gt;</div><div class="line">           &lt;tx:method name=&quot;get*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;load*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;query*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;select*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;list*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;find*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;query&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;*&quot;/&gt;</div><div class="line">       &lt;/tx:attributes&gt;</div><div class="line">   &lt;/tx:advice&gt;</div><div class="line">   </div><div class="line">   &lt;!-- Aop配置，通知事务管理器需要监控的层 --&gt;</div><div class="line">   &lt;aop:config&gt;</div><div class="line">       &lt;aop:pointcut expression=&quot;execution(* com..service.*Service.*(..))&quot; id=&quot;methodAdvicePointCut&quot;/&gt;</div><div class="line">       &lt;aop:advisor advice-ref=&quot;methodAdvice&quot; pointcut-ref=&quot;methodAdvicePointCut&quot;/&gt;</div><div class="line">   &lt;/aop:config&gt;</div><div class="line">   </div><div class="line">   &lt;!-- 启动事务注解 --&gt;</div><div class="line">   &lt;tx:annotation-driven proxy-target-class=&quot;true&quot; transaction-manager=&quot;transactionManager&quot;/&gt;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Transactional属性"><a href="#Transactional属性" class="headerlink" title="Transactional属性"></a>Transactional属性</h2><p><strong>在service层加入注解</strong></p>
+<blockquote>
+<p>@Transactional</p>
+<h3 id="readOnly"><a href="#readOnly" class="headerlink" title="readOnly"></a>readOnly</h3><p>如果属性的值为真的话，那么直能用于读的操作，例如查询<br>不能进行数据库的修改，添加，删除。</p>
+<h3 id="noRollBackFor"><a href="#noRollBackFor" class="headerlink" title="noRollBackFor"></a>noRollBackFor</h3><p>当于到某种异常时候不回滚 </p>
+<h3 id="RollBack"><a href="#RollBack" class="headerlink" title="RollBack"></a>RollBack</h3><p>回滚事件默认只对继承<code>RunTimeException</code>的异常有效，如果要加入别的异常，在属性的值的地方添加。</p>
+<h3 id="事务传播属性propagation"><a href="#事务传播属性propagation" class="headerlink" title="事务传播属性propagation"></a>事务传播属性propagation</h3><p>两个属性 1. <code>REQUIRED</code>  2. <code>REQUIRED_NEW</code></p>
+<ol>
+<li>REQUIRED<br><img src="https://dn-raysnote.qbox.me/p%2Fnotes%2F292b4b1cb21e54c" alt="required原理"></li>
+<li>RQQUIRED_NEW<br><img src="https://dn-raysnote.qbox.me/p%2Fnotes%2Fde5b8613ab0167d" alt="requried_new原理"></li>
+</ol>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/05/springJDBC/" itemprop="url">
+                  Spring mvc
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-08-05T16:01:53+08:00" content="2016-08-05">
+              2016-08-05
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="配置JDBC"><a href="#配置JDBC" class="headerlink" title="配置JDBC"></a>配置JDBC</h2><h3 id="配置JAR包"><a href="#配置JAR包" class="headerlink" title="配置JAR包"></a>配置JAR包</h3><p>jar包为druid.jar</p>
+<h3 id="配置xml文件"><a href="#配置xml文件" class="headerlink" title="配置xml文件"></a>配置xml文件</h3><figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">&lt;context:annotation-config/&gt;</div><div class="line">    &lt;context:component-scan base-package=<span class="string">"com.shxt"</span>/&gt;</div><div class="line">    &lt;aop:aspectj-autoproxy proxy-target-class=<span class="string">"true"</span>/&gt;</div><div class="line">    &lt;context:property-placeholder location=<span class="string">"classpath:jdbc.properties"</span>/&gt;</div><div class="line">    &lt;!-- 数据源 --&gt;</div><div class="line">    &lt;bean id=<span class="string">"druidDataSource"</span> class=<span class="string">"com.alibaba.druid.pool.DruidDataSource"</span> destroy-method=<span class="string">"close"</span>&gt;</div><div class="line">        &lt;property name=<span class="string">"driverClassName"</span> value=<span class="string">"<span class="variable">$&#123;shxt.driver&#125;</span>"</span>/&gt;</div><div class="line">        &lt;property name=<span class="string">"url"</span> value=<span class="string">"<span class="variable">$&#123;shxt.url&#125;</span>"</span>/&gt;</div><div class="line">        &lt;property name=<span class="string">"username"</span> value=<span class="string">"<span class="variable">$&#123;shxt.username&#125;</span>"</span>/&gt;</div><div class="line">        &lt;property name=<span class="string">"password"</span> value=<span class="string">"<span class="variable">$&#123;shxt.password&#125;</span>"</span>/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!-- JDBCTEMPLATE --&gt;</div><div class="line">    &lt;bean id=<span class="string">"jdbcTemplate"</span> class=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</div><div class="line">        &lt;property name=<span class="string">"dataSource"</span> ref=<span class="string">"druidDataSource"</span>&gt;&lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div></pre></td></tr></table></figure>
+<h2 id="调用jdbcTemplate"><a href="#调用jdbcTemplate" class="headerlink" title="调用jdbcTemplate"></a>调用jdbcTemplate</h2><figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">@Autowired</div><div class="line">   private JdbcTemplate jdbcTemplate;</div><div class="line">   /* (方法重写)</div><div class="line">    * @see com.shxt.dao.UserDao<span class="comment">#ListMap()</span></div><div class="line">    */</div><div class="line">   @Override</div><div class="line">   public List&lt;Map&lt;String, Object&gt;&gt; <span class="function"><span class="title">ListMap</span></span>() &#123;</div><div class="line">       <span class="built_in">return</span> jdbcTemplate.queryForList(SQL);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   /* (方法重写)</div><div class="line">    * @see com.shxt.dao.UserDao<span class="comment">#listUserALL()</span></div><div class="line">    */</div><div class="line">   @Override</div><div class="line">   public List&lt;SysUser&gt; <span class="function"><span class="title">listUserALL</span></span>() &#123;</div><div class="line">       <span class="built_in">return</span> jdbcTemplate.query(SQL, new BeanPropertyRowMapper&lt;SysUser&gt;(SysUser.class));</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<hr>
+<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><ul>
+<li>事务管理是企业级应用程序开发中必不可少的技术,  用来确保数据的完整性和一致性. </li>
+<li>事务就是一系列的动作, 它们被当做一个单独的工作单元. 这些动作要么全部完成, 要么全部不起作用</li>
+<li>事务的四个关键属性(ACID)</li>
+</ul>
+<ol>
+<li>原子性(atomicity): 事务是一个原子操作, 由一系列动作组成. 事务的原子性确保动作要么全部完成要么完全不起作用.</li>
+<li>一致性(consistency): 一旦所有事务动作完成, 事务就被提交. 数据和资源就处于一种满足业务规则的一致性状态中.</li>
+<li>隔离性(isolation): 可能有许多事务会同时处理相同的数据, 因此每个事物都应该与其他事务隔离开来, 防止数据损坏.</li>
+<li>持久性(durability): 一旦事务完成, 无论发生什么系统错误, 它的结果都不应该受到影响. 通常情况下, 事务的结果被写到持久化存储器中.</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/02/new-article/" itemprop="url">
+                  new article
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-08-02T23:00:37+08:00" content="2016-08-02">
+              2016-08-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/02/hello-world/" itemprop="url">
                   Hello World
                 </a>
@@ -374,7 +683,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">Tags</span>
               </a>
             </div>
