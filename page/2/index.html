@@ -238,6 +238,113 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/07/spring入门/" itemprop="url">
+                  spring入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-08-07T16:47:07+08:00" content="2016-08-07">
+              2016-08-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="spring入门"><a href="#spring入门" class="headerlink" title="spring入门"></a>spring入门</h1><h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><ul>
+<li>AOP面向切面编程（Aspect-Oriented Programming）:是一种新的方法论，是对传统OPP面向对象编程的补充。</li>
+<li>AOP的主要编程对象是切面。</li>
+<li>AOP的好处：<ol>
+<li>每个事物逻辑位于一个位置，代码不分散，便于维护和升级</li>
+<li>业务模块更加简洁，只包含核心业务代码。</li>
+</ol>
+</li>
+</ul>
+<p>AOP叫做面向切面编程，顾名思义它是在核心代码的外层包裹上一层新的代码，通过这层代码对核心代码进行扩展。</p>
+<h3 id="AOP的配置以及JAR包"><a href="#AOP的配置以及JAR包" class="headerlink" title="AOP的配置以及JAR包"></a>AOP的配置以及JAR包</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">&lt;!-- 启动注解 --&gt;</div><div class="line">   &lt;context:annotation-config/&gt;</div><div class="line">   &lt;!-- 启动扫描 --&gt;</div><div class="line">   &lt;context:component-scan base-package=<span class="string">"com.shxt"</span>/&gt;</div><div class="line">   &lt;!-- 启动AOP注释 --&gt;</div><div class="line">   &lt;aop:aspectj-autoproxy proxy-target-class=<span class="string">"true"</span>/&gt;</div><div class="line">   </div><div class="line">   &lt;bean id=<span class="string">"loggerAspect"</span> class=<span class="string">"com.shxt.aspect.LoggerAspect"</span>/&gt;</div><div class="line">   </div><div class="line">   &lt;!-- 配置AOP --&gt;</div><div class="line">   &lt;aop:config&gt;</div><div class="line">       &lt;!-- 切面 --&gt;</div><div class="line">       &lt;aop:aspect id=<span class="string">"methodAspect"</span> ref=<span class="string">"loggerAspect"</span>&gt;</div><div class="line">           &lt;!-- @pointcut --&gt;</div><div class="line">           &lt;aop:pointcut expression=<span class="string">"execution(* com..*Service.*(..)) and !execution(* com..*Service.sub(..))"</span> id=<span class="string">"methodPointCut"</span>/&gt;</div><div class="line">           &lt;!-- @Before --&gt;</div><div class="line">           &lt;aop:before method=<span class="string">"前置通知_无论程序是否正确_一直执行"</span> pointcut-ref=<span class="string">"methodPointCut"</span>/&gt;</div><div class="line">           &lt;!-- @AfterRuturning --&gt;</div><div class="line">           &lt;aop:after-returning method=<span class="string">"返回通知_只有程序正常执行后"</span> returning=<span class="string">"shxt"</span> pointcut-ref=<span class="string">"methodPointCut"</span>/&gt;</div><div class="line">       &lt;/aop:aspect&gt;</div><div class="line">   &lt;/aop:config&gt;</div></pre></td></tr></table></figure>
+<h3 id="AOP代码示例"><a href="#AOP代码示例" class="headerlink" title="AOP代码示例"></a>AOP代码示例</h3><figure class="highlight"><table><tr><td class="code"><pre><div class="line">@Pointcut("addPointCut() || subPointCut()")</div><div class="line">  public void addAndsub() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Pointcut("execution(int com..*Service.add(int,int))")</div><div class="line">  public void addPointCut() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Pointcut("execution(int com..*Service.div(int,int))")</div><div class="line">  public void divPointCut() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Pointcut("execution(int com..*Service.mul(int,int))")</div><div class="line">  public void mulPointCut() &#123;</div><div class="line">  &#125;</div><div class="line">  @Pointcut("execution(int com..*Service.sub(int,int))")</div><div class="line">  public void subPointCut() &#123;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"> @AfterReturning(value = "mulPointCut()", returning = "shxt")</div><div class="line">  public void 返回通知_只有程序正常执行后(JoinPoint joinPoint, Object shxt) &#123;</div><div class="line">      System.out.println("返回通知_只有程序正常执行后--" + shxt);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @After("subPointCut()")</div><div class="line">  public void 后置通知_无论程序是否正确_一直执行(JoinPoint joinPoint) &#123;</div><div class="line">      System.out.println("后置通知_无论程序是否正确_一直执行");</div><div class="line">  &#125;</div><div class="line">  @Before("addPointCut()")</div><div class="line">  public void 前置通知_无论程序是否正确_一直执行(JoinPoint joinPoint) &#123;</div><div class="line"></div><div class="line">      System.out.println("前置通知_无论程序是否正确_一直执行");</div><div class="line">      System.out.println(":" + joinPoint.getKind());</div><div class="line">      System.out.println(":" + joinPoint.getTarget().getClass().getName());</div><div class="line">      System.out.println("传递的参数:" + Arrays.asList(joinPoint.getArgs()));</div><div class="line">      System.out.println(":" + joinPoint.getSignature().getName());</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @AfterThrowing(value = "divPointCut()", throwing = "xy17")</div><div class="line">  public void 异常通知_只有出现异常的时候_执行(JoinPoint joinPoint, Exception xy17) &#123;</div><div class="line">      System.out.println("异常通知_只有出现异常的时候_执行---" + xy17);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h2 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h2><p>IOC 英文全拼是 inversion of control ,  控制反转，依赖注入。<br>IOC 就是将你自己设计好的类交给系统去控制，不再由自己在内部控制，就是控制反转。</p>
+<p>IOC 事典型的工厂模式 通过sessionFactory去注入实例。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/05/事务/" itemprop="url">
                   事务
                 </a>
@@ -673,7 +780,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
