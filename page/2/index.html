@@ -238,6 +238,220 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/22/tomcat目录结构/" itemprop="url">
+                  tomcat目录结构
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-08-22T15:46:23+08:00" content="2016-08-22">
+              2016-08-22
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="tomcat7目录结构功能说明如下"><a href="#tomcat7目录结构功能说明如下" class="headerlink" title="tomcat7目录结构功能说明如下"></a>tomcat7目录结构功能说明如下</h2><ul>
+<li>bin:存放tomcat的一些可执行文件，比如启动tomcat或者关闭tomcat。</li>
+<li>common:存放了tomcat和所有web应用都可以使用的类和jar包。</li>
+<li>conf:存放tomcat的一些配置文件。</li>
+<li>logs:存放tomcat和web应用输出的日志文件。</li>
+<li>server:存放只有tomcat才能使用的类和jar包,以及tomcat自带的web应用。</li>
+<li>temp:存放一些临时文件。</li>
+<li>webapps:存放开发的web应用。</li>
+<li>work:存放jsp相关的一些servlet类.</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/10/实例化对象的5种方式/" itemprop="url">
+                  实例化对象的5种方式
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-08-10T18:11:19+08:00" content="2016-08-10">
+              2016-08-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>java中类的实例化方法有5种途径</p>
+<ol>
+<li>使用new操作符</li>
+<li>使用class对象的newInstance()方法，反射手段</li>
+<li>调用clone()方法，对现有实例的拷贝</li>
+<li>通过objectInputStream的readObject()方法反序列化类</li>
+<li>通过工厂方法返回对象，如：String str=String.valueOf();</li>
+</ol>
+<p>使用new 来实例化类是我们平常写的方法不做说明。</p>
+<ul>
+<li>先声明一个ClassInstance.java</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">import java.io.*;</div><div class="line"></div><div class="line">class ClassInstance implements Cloneable, Serializable &#123;</div><div class="line">    private String str = "测试...";</div><div class="line">    public void fun()&#123;</div><div class="line">        System.out.println(str);</div><div class="line">    &#125;</div><div class="line">    public ClassInstance(String str)&#123;</div><div class="line">        System.out.println("有参类的实例化");</div><div class="line">        this.str += str; </div><div class="line">    &#125;</div><div class="line">    public ClassInstance()&#123;</div><div class="line">        System.out.println("无参类的实例化");</div><div class="line">    &#125;</div><div class="line">    public Object clone()&#123;</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>然后是测试</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">import java.io.*;</div><div class="line">import java.lang.reflect.*;</div><div class="line"></div><div class="line">public class ClassInstanceTest&#123;</div><div class="line">    public static void main(String[] args) throws ClassNotFoundException, InstantiationException,</div><div class="line">           IllegalAccessException, IOException,InvocationTargetException, NoSuchMethodException&#123;</div><div class="line">        //第一种类的实例化方式</div><div class="line">        ClassInstance ci01 = new ClassInstance("01");</div><div class="line">        ci01.fun();</div><div class="line"></div><div class="line">        //第二种类的实例化方式</div><div class="line">        ClassInstance ci02 = (ClassInstance) Class.forName("ClassInstance").newInstance();</div><div class="line">        ci02.fun();</div><div class="line"></div><div class="line">        //第三种类的实例化方式</div><div class="line">        ClassInstance ci03 = (ClassInstance) ci01.clone();</div><div class="line">        ci03.fun();</div><div class="line"></div><div class="line">        //第四种类的实例化方式</div><div class="line">        FileOutputStream fos = new FileOutputStream("ci.tmp");</div><div class="line">        ObjectOutputStream oos = new ObjectOutputStream(fos);</div><div class="line">        oos.writeObject(ci01);</div><div class="line">        oos.close();</div><div class="line">        fos.close();</div><div class="line">        </div><div class="line">        FileInputStream fis = new FileInputStream("ci.tmp");</div><div class="line">        ObjectInputStream ois = new ObjectInputStream(fis);</div><div class="line">        </div><div class="line">        ClassInstance ci04  = (ClassInstance) ois.readObject();</div><div class="line">        ois.close();</div><div class="line">        fis.close();</div><div class="line">        </div><div class="line">        ci04.fun();</div><div class="line">        System.out.println("--------------------额外测试--------------------");</div><div class="line">        ClassInstance ci05 = null;</div><div class="line">        //额外的思考 在第二种类实例化的方式中有没有一种方法实现有参数的构造方式</div><div class="line">        //获得类的构造信息</div><div class="line">        Constructor[] ctor = Class.forName("ClassInstance").getDeclaredConstructors();</div><div class="line">        //找到我们需要的构造方法</div><div class="line">        for(int i=0;i&lt;ctor.length;i++ )&#123;</div><div class="line">            Class[] cl = ctor[i].getParameterTypes();</div><div class="line">            if(cl.length == 1)&#123;</div><div class="line">                //实例化对象</div><div class="line">                ci05 = (ClassInstance) Class.forName("ClassInstance").getConstructor(cl).newInstance(new Object[]&#123;"05"&#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        ci05.fun();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这些方法都必须调用构造函数</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/07/spring入门/" itemprop="url">
                   spring入门
                 </a>
@@ -540,206 +754,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/02/new-article/" itemprop="url">
-                  new article
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-08-02T23:00:37+08:00" content="2016-08-02">
-              2016-08-02
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/02/hello-world/" itemprop="url">
-                  Hello World
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">Veröffentlicht am</span>
-            <time itemprop="dateCreated" datetime="2016-08-02T20:23:58+08:00" content="2016-08-02">
-              2016-08-02
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -780,7 +799,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">Artikel</span>
             </a>
           </div>
