@@ -282,7 +282,35 @@
       
         
           
-            
+            <h2 id="collection的结构"><a href="#collection的结构" class="headerlink" title="collection的结构"></a>collection的结构</h2><h3 id="collection-包括List列表和Set集"><a href="#collection-包括List列表和Set集" class="headerlink" title="collection 包括List列表和Set集"></a>collection 包括List列表和Set集</h3><p>Collection是单列集合</p>
+<p><strong>List</strong></p>
+<ol>
+<li>List  元素是有序的可重复的</li>
+<li>有序的List 对元素的插入位置可以精确的控制。</li>
+<li>可以根据元素的索引访问元素。</li>
+<li>list适合经常插入，删除数据，但是随机取数的效率很低。</li>
+</ol>
+<p><strong>Set</strong></p>
+<ol>
+<li>无序的不可以重复的。</li>
+<li>取出元素的方法只有迭代器。</li>
+<li>不可存放重复元素，元素存取是无序的。</li>
+<li>适合经常的随机存储，插入，删除。但是在遍历的时候效果不好。</li>
+</ol>
+<h3 id="list和set下层"><a href="#list和set下层" class="headerlink" title="list和set下层"></a>list和set下层</h3><h4 id="LIST"><a href="#LIST" class="headerlink" title="LIST"></a>LIST</h4><ul>
+<li>vector 线程安全，但是速度慢，已被ArrayList代替。底层数据结构是数组结构。</li>
+<li>ArrayList 线程不安全，查询速度快。底层数据结构是数组结构。</li>
+<li>LinkList 线程不安全，增删速度快。底层数据结构是列表结构。</li>
+</ul>
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><ul>
+<li>HashSet 线程不安全，存取速度快。依赖元素的hashcode方法和equal方法保证元素的唯一性。</li>
+<li>TreeSet 线程不安全，可以对set集合中的元素进行排序。通过compareTo或者compare方法保证元素的唯一性。元素是以二叉树的形式存放的。</li>
+</ul>
+<h3 id="collection和collections的区别"><a href="#collection和collections的区别" class="headerlink" title="collection和collections的区别"></a>collection和collections的区别</h3><ul>
+<li>collection是集合类的上级接口，子接口主要有Set，List，Map</li>
+<li>collections是针对集合类的一个帮助类，提供了操作集合的工具方法，一系列静态方法实现对集合的搜索，排序，线程安全化等操作。</li>
+</ul>
+
           
         
       
@@ -375,7 +403,14 @@
       
         
           
-            
+            <p>mydate97是一款日期插件，可以选择不同的时间输入方式，非常强大。</p>
+<p>mydate97需要的包需从网上下载。直接可以调用。</p>
+<p>然后在页面调用</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"$&#123;path &#125;/js/My97DatePicker/WdatePicker.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>之后在form表单中添加类和 调用方法</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">&lt;label&gt;实际归还时期&lt;/label&gt;</div><div class="line">&lt;<span class="selector-tag">input</span> name=<span class="string">"real_date"</span> id=<span class="string">"real_date"</span> type=<span class="string">"text"</span> class=<span class="string">"Wdate"</span>  onclick=<span class="string">"WdatePicker(&#123;dateFmt:'yyyy-MM-dd HH:mm',maxDate:'%y-%M-%d'&#125;)"</span>/&gt;</div></pre></td></tr></table></figure>
+<p>mydate97中有很多内置的方法，详情戳<a href="http://www.my97.net/dp/demo/index.htm" target="_blank" rel="external">enter description here</a></p>
+
           
         
       
@@ -866,7 +901,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">Tags</span>
               </a>
             </div>
