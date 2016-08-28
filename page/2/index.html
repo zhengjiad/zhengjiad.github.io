@@ -199,16 +199,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404.html" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
-            
-            公益404
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -292,18 +282,19 @@
       
         
           
-            <h2 id="tomcat7目录结构功能说明如下"><a href="#tomcat7目录结构功能说明如下" class="headerlink" title="tomcat7目录结构功能说明如下"></a>tomcat7目录结构功能说明如下</h2><ul>
-<li>bin:存放tomcat的一些可执行文件，比如启动tomcat或者关闭tomcat。</li>
-<li>common:存放了tomcat和所有web应用都可以使用的类和jar包。</li>
-<li>conf:存放tomcat的一些配置文件。</li>
-<li>logs:存放tomcat和web应用输出的日志文件。</li>
-<li>server:存放只有tomcat才能使用的类和jar包,以及tomcat自带的web应用。</li>
-<li>temp:存放一些临时文件。</li>
-<li>webapps:存放开发的web应用。</li>
-<li>work:存放jsp相关的一些servlet类.</li>
-</ul>
+          tomcat7目录结构功能说明如下
+bin:存放tomcat的一些可执行文件，比如启动tomcat或者关闭tomcat。
+common:存放了tomcat和所有web应用都可以使用的类和jar包。
+conf:存放tomcat的一些配置文件。
+logs:存放tomcat和web应用输出的日志文件。
+s
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/22/tomcat目录结构/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -395,26 +386,20 @@
       
         
           
-            <p>java中类的实例化方法有5种途径</p>
-<ol>
-<li>使用new操作符</li>
-<li>使用class对象的newInstance()方法，反射手段</li>
-<li>调用clone()方法，对现有实例的拷贝</li>
-<li>通过objectInputStream的readObject()方法反序列化类</li>
-<li>通过工厂方法返回对象，如：String str=String.valueOf();</li>
-</ol>
-<p>使用new 来实例化类是我们平常写的方法不做说明。</p>
-<ul>
-<li>先声明一个ClassInstance.java</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><div class="line">import java.io.*;</div><div class="line"></div><div class="line">class ClassInstance implements Cloneable, Serializable &#123;</div><div class="line">    private String str = "测试...";</div><div class="line">    public void fun()&#123;</div><div class="line">        System.out.println(str);</div><div class="line">    &#125;</div><div class="line">    public ClassInstance(String str)&#123;</div><div class="line">        System.out.println("有参类的实例化");</div><div class="line">        this.str += str; </div><div class="line">    &#125;</div><div class="line">    public ClassInstance()&#123;</div><div class="line">        System.out.println("无参类的实例化");</div><div class="line">    &#125;</div><div class="line">    public Object clone()&#123;</div><div class="line">        return this;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>然后是测试</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><div class="line">import java.io.*;</div><div class="line">import java.lang.reflect.*;</div><div class="line"></div><div class="line">public class ClassInstanceTest&#123;</div><div class="line">    public static void main(String[] args) throws ClassNotFoundException, InstantiationException,</div><div class="line">           IllegalAccessException, IOException,InvocationTargetException, NoSuchMethodException&#123;</div><div class="line">        //第一种类的实例化方式</div><div class="line">        ClassInstance ci01 = new ClassInstance("01");</div><div class="line">        ci01.fun();</div><div class="line"></div><div class="line">        //第二种类的实例化方式</div><div class="line">        ClassInstance ci02 = (ClassInstance) Class.forName("ClassInstance").newInstance();</div><div class="line">        ci02.fun();</div><div class="line"></div><div class="line">        //第三种类的实例化方式</div><div class="line">        ClassInstance ci03 = (ClassInstance) ci01.clone();</div><div class="line">        ci03.fun();</div><div class="line"></div><div class="line">        //第四种类的实例化方式</div><div class="line">        FileOutputStream fos = new FileOutputStream("ci.tmp");</div><div class="line">        ObjectOutputStream oos = new ObjectOutputStream(fos);</div><div class="line">        oos.writeObject(ci01);</div><div class="line">        oos.close();</div><div class="line">        fos.close();</div><div class="line">        </div><div class="line">        FileInputStream fis = new FileInputStream("ci.tmp");</div><div class="line">        ObjectInputStream ois = new ObjectInputStream(fis);</div><div class="line">        </div><div class="line">        ClassInstance ci04  = (ClassInstance) ois.readObject();</div><div class="line">        ois.close();</div><div class="line">        fis.close();</div><div class="line">        </div><div class="line">        ci04.fun();</div><div class="line">        System.out.println("--------------------额外测试--------------------");</div><div class="line">        ClassInstance ci05 = null;</div><div class="line">        //额外的思考 在第二种类实例化的方式中有没有一种方法实现有参数的构造方式</div><div class="line">        //获得类的构造信息</div><div class="line">        Constructor[] ctor = Class.forName("ClassInstance").getDeclaredConstructors();</div><div class="line">        //找到我们需要的构造方法</div><div class="line">        for(int i=0;i&lt;ctor.length;i++ )&#123;</div><div class="line">            Class[] cl = ctor[i].getParameterTypes();</div><div class="line">            if(cl.length == 1)&#123;</div><div class="line">                //实例化对象</div><div class="line">                ci05 = (ClassInstance) Class.forName("ClassInstance").getConstructor(cl).newInstance(new Object[]&#123;"05"&#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        ci05.fun();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这些方法都必须调用构造函数</p>
+          java中类的实例化方法有5种途径
 
-          
+使用new操作符
+使用class对象的newInstance()方法，反射手段
+调用clone()方法，对现有实例的拷贝
+通过objectInputStream的readObject()方法反序列化类
+通过工厂方法返回对象，如：String str=String
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/10/实例化对象的5种方式/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -506,22 +491,22 @@
       
         
           
-            <h1 id="spring入门"><a href="#spring入门" class="headerlink" title="spring入门"></a>spring入门</h1><h2 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h2><ul>
-<li>AOP面向切面编程（Aspect-Oriented Programming）:是一种新的方法论，是对传统OPP面向对象编程的补充。</li>
-<li>AOP的主要编程对象是切面。</li>
-<li>AOP的好处：<ol>
-<li>每个事物逻辑位于一个位置，代码不分散，便于维护和升级</li>
-<li>业务模块更加简洁，只包含核心业务代码。</li>
-</ol>
-</li>
-</ul>
-<p>AOP叫做面向切面编程，顾名思义它是在核心代码的外层包裹上一层新的代码，通过这层代码对核心代码进行扩展。</p>
-<h3 id="AOP的配置以及JAR包"><a href="#AOP的配置以及JAR包" class="headerlink" title="AOP的配置以及JAR包"></a>AOP的配置以及JAR包</h3><figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">&lt;!-- 启动注解 --&gt;</div><div class="line">   &lt;context:annotation-config/&gt;</div><div class="line">   &lt;!-- 启动扫描 --&gt;</div><div class="line">   &lt;context:component-scan base-package=<span class="string">"com.shxt"</span>/&gt;</div><div class="line">   &lt;!-- 启动AOP注释 --&gt;</div><div class="line">   &lt;aop:aspectj-autoproxy proxy-target-class=<span class="string">"true"</span>/&gt;</div><div class="line">   </div><div class="line">   &lt;bean id=<span class="string">"loggerAspect"</span> class=<span class="string">"com.shxt.aspect.LoggerAspect"</span>/&gt;</div><div class="line">   </div><div class="line">   &lt;!-- 配置AOP --&gt;</div><div class="line">   &lt;aop:config&gt;</div><div class="line">       &lt;!-- 切面 --&gt;</div><div class="line">       &lt;aop:aspect id=<span class="string">"methodAspect"</span> ref=<span class="string">"loggerAspect"</span>&gt;</div><div class="line">           &lt;!-- @pointcut --&gt;</div><div class="line">           &lt;aop:pointcut expression=<span class="string">"execution(* com..*Service.*(..)) and !execution(* com..*Service.sub(..))"</span> id=<span class="string">"methodPointCut"</span>/&gt;</div><div class="line">           &lt;!-- @Before --&gt;</div><div class="line">           &lt;aop:before method=<span class="string">"前置通知_无论程序是否正确_一直执行"</span> pointcut-ref=<span class="string">"methodPointCut"</span>/&gt;</div><div class="line">           &lt;!-- @AfterRuturning --&gt;</div><div class="line">           &lt;aop:after-returning method=<span class="string">"返回通知_只有程序正常执行后"</span> returning=<span class="string">"shxt"</span> pointcut-ref=<span class="string">"methodPointCut"</span>/&gt;</div><div class="line">       &lt;/aop:aspect&gt;</div><div class="line">   &lt;/aop:config&gt;</div></pre></td></tr></table></figure>
-<h3 id="AOP代码示例"><a href="#AOP代码示例" class="headerlink" title="AOP代码示例"></a>AOP代码示例</h3><figure class="highlight"><table><tr><td class="code"><pre><div class="line">@Pointcut("addPointCut() || subPointCut()")</div><div class="line">  public void addAndsub() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Pointcut("execution(int com..*Service.add(int,int))")</div><div class="line">  public void addPointCut() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Pointcut("execution(int com..*Service.div(int,int))")</div><div class="line">  public void divPointCut() &#123;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @Pointcut("execution(int com..*Service.mul(int,int))")</div><div class="line">  public void mulPointCut() &#123;</div><div class="line">  &#125;</div><div class="line">  @Pointcut("execution(int com..*Service.sub(int,int))")</div><div class="line">  public void subPointCut() &#123;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"> @AfterReturning(value = "mulPointCut()", returning = "shxt")</div><div class="line">  public void 返回通知_只有程序正常执行后(JoinPoint joinPoint, Object shxt) &#123;</div><div class="line">      System.out.println("返回通知_只有程序正常执行后--" + shxt);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @After("subPointCut()")</div><div class="line">  public void 后置通知_无论程序是否正确_一直执行(JoinPoint joinPoint) &#123;</div><div class="line">      System.out.println("后置通知_无论程序是否正确_一直执行");</div><div class="line">  &#125;</div><div class="line">  @Before("addPointCut()")</div><div class="line">  public void 前置通知_无论程序是否正确_一直执行(JoinPoint joinPoint) &#123;</div><div class="line"></div><div class="line">      System.out.println("前置通知_无论程序是否正确_一直执行");</div><div class="line">      System.out.println(":" + joinPoint.getKind());</div><div class="line">      System.out.println(":" + joinPoint.getTarget().getClass().getName());</div><div class="line">      System.out.println("传递的参数:" + Arrays.asList(joinPoint.getArgs()));</div><div class="line">      System.out.println(":" + joinPoint.getSignature().getName());</div><div class="line"></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @AfterThrowing(value = "divPointCut()", throwing = "xy17")</div><div class="line">  public void 异常通知_只有出现异常的时候_执行(JoinPoint joinPoint, Exception xy17) &#123;</div><div class="line">      System.out.println("异常通知_只有出现异常的时候_执行---" + xy17);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h2 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h2><p>IOC 英文全拼是 inversion of control ,  控制反转，依赖注入。<br>IOC 就是将你自己设计好的类交给系统去控制，不再由自己在内部控制，就是控制反转。</p>
-<p>IOC 事典型的工厂模式 通过sessionFactory去注入实例。</p>
+          spring入门AOP
+AOP面向切面编程（Aspect-Oriented Programming）:是一种新的方法论，是对传统OPP面向对象编程的补充。
+AOP的主要编程对象是切面。
+AOP的好处：
+每个事物逻辑位于一个位置，代码不分散，便于维护和升级
+业务模块更加简洁，只包含核心业务代码。
 
-          
+
+
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/07/spring入门/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -613,23 +598,14 @@
       
         
           
-            <h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><h2 id="事务的配置"><a href="#事务的配置" class="headerlink" title="事务的配置"></a>事务的配置</h2><h3 id="注解配置"><a href="#注解配置" class="headerlink" title="注解配置"></a>注解配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;!-- 启动Spring注解 --&gt;</div><div class="line">   &lt;context:annotation-config/&gt;</div><div class="line">   &lt;!-- 扫描 --&gt;</div><div class="line">   &lt;context:component-scan base-package=&quot;com.shxt&quot;/&gt;</div><div class="line">   &lt;!-- aop代理 --&gt;</div><div class="line">   &lt;aop:aspectj-autoproxy proxy-target-class=&quot;true&quot;/&gt;</div><div class="line"></div><div class="line">   &lt;!-- 读取属性文件 激活$&#123;...&#125;--&gt;</div><div class="line">   &lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;/&gt;</div><div class="line">   </div><div class="line">   &lt;!-- 数据源 --&gt;</div><div class="line">   &lt;bean id=&quot;druidDataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot; destroy-method=&quot;close&quot;&gt;</div><div class="line">       &lt;property name=&quot;driverClassName&quot; value=&quot;$&#123;shxt.driver&#125;&quot;/&gt;</div><div class="line">       &lt;property name=&quot;url&quot; value=&quot;$&#123;shxt.url&#125;&quot;/&gt;</div><div class="line">       &lt;property name=&quot;username&quot; value=&quot;$&#123;shxt.username&#125;&quot;/&gt;</div><div class="line">       &lt;property name=&quot;password&quot; value=&quot;$&#123;shxt.password&#125;&quot;/&gt;</div><div class="line">   &lt;/bean&gt;</div><div class="line">   </div><div class="line">   &lt;!-- JdbcTemplate --&gt;</div><div class="line">   &lt;bean id=&quot;jdbcTemplate&quot; class=&quot;org.springframework.jdbc.core.JdbcTemplate&quot;&gt;</div><div class="line">       &lt;property name=&quot;dataSource&quot; ref=&quot;druidDataSource&quot;/&gt;</div><div class="line">   &lt;/bean&gt;</div><div class="line"></div><div class="line">   &lt;!-- 配置事务管理器 --&gt;</div><div class="line">   &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</div><div class="line">       &lt;property name=&quot;dataSource&quot; ref=&quot;druidDataSource&quot;/&gt;</div><div class="line">   &lt;/bean&gt;</div><div class="line">   &lt;!-- 启动事务注解 --&gt;</div><div class="line">   &lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot; proxy-target-class=&quot;true&quot;/&gt;</div></pre></td></tr></table></figure>
-<h3 id="xml配置"><a href="#xml配置" class="headerlink" title="xml配置"></a>xml配置</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&lt;!-- 事务管理器 --&gt;</div><div class="line">   &lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</div><div class="line">       &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;</div><div class="line">   &lt;/bean&gt;</div><div class="line">   </div><div class="line">   &lt;!-- 通知事务管理器，需要监控的方式 --&gt;</div><div class="line">   &lt;tx:advice id=&quot;methodAdvice&quot; transaction-manager=&quot;transactionManager&quot;&gt;</div><div class="line">       &lt;tx:attributes&gt;</div><div class="line">           &lt;tx:method name=&quot;get*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;load*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;query*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;select*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;list*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;find*&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;query&quot; read-only=&quot;true&quot;/&gt;</div><div class="line">           &lt;tx:method name=&quot;*&quot;/&gt;</div><div class="line">       &lt;/tx:attributes&gt;</div><div class="line">   &lt;/tx:advice&gt;</div><div class="line">   </div><div class="line">   &lt;!-- Aop配置，通知事务管理器需要监控的层 --&gt;</div><div class="line">   &lt;aop:config&gt;</div><div class="line">       &lt;aop:pointcut expression=&quot;execution(* com..service.*Service.*(..))&quot; id=&quot;methodAdvicePointCut&quot;/&gt;</div><div class="line">       &lt;aop:advisor advice-ref=&quot;methodAdvice&quot; pointcut-ref=&quot;methodAdvicePointCut&quot;/&gt;</div><div class="line">   &lt;/aop:config&gt;</div><div class="line">   </div><div class="line">   &lt;!-- 启动事务注解 --&gt;</div><div class="line">   &lt;tx:annotation-driven proxy-target-class=&quot;true&quot; transaction-manager=&quot;transactionManager&quot;/&gt;</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="Transactional属性"><a href="#Transactional属性" class="headerlink" title="Transactional属性"></a>Transactional属性</h2><p><strong>在service层加入注解</strong></p>
-<blockquote>
-<p>@Transactional</p>
-<h3 id="readOnly"><a href="#readOnly" class="headerlink" title="readOnly"></a>readOnly</h3><p>如果属性的值为真的话，那么直能用于读的操作，例如查询<br>不能进行数据库的修改，添加，删除。</p>
-<h3 id="noRollBackFor"><a href="#noRollBackFor" class="headerlink" title="noRollBackFor"></a>noRollBackFor</h3><p>当于到某种异常时候不回滚 </p>
-<h3 id="RollBack"><a href="#RollBack" class="headerlink" title="RollBack"></a>RollBack</h3><p>回滚事件默认只对继承<code>RunTimeException</code>的异常有效，如果要加入别的异常，在属性的值的地方添加。</p>
-<h3 id="事务传播属性propagation"><a href="#事务传播属性propagation" class="headerlink" title="事务传播属性propagation"></a>事务传播属性propagation</h3><p>两个属性 1. <code>REQUIRED</code>  2. <code>REQUIRED_NEW</code></p>
-<ol>
-<li>REQUIRED<br><img src="https://dn-raysnote.qbox.me/p%2Fnotes%2F292b4b1cb21e54c" alt="required原理"></li>
-<li>RQQUIRED_NEW<br><img src="https://dn-raysnote.qbox.me/p%2Fnotes%2Fde5b8613ab0167d" alt="requried_new原理"></li>
-</ol>
-</blockquote>
+          事务事务的配置注解配置&lt;!-- 启动Spring注解 --&gt;   &lt;context:annotation-config/&gt;   &lt;!-- 扫描 --&gt;   &lt;context:component-scan base-package=&quot;com.shxt
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/05/事务/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -721,23 +697,15 @@
       
         
           
-            <h2 id="配置JDBC"><a href="#配置JDBC" class="headerlink" title="配置JDBC"></a>配置JDBC</h2><h3 id="配置JAR包"><a href="#配置JAR包" class="headerlink" title="配置JAR包"></a>配置JAR包</h3><p>jar包为druid.jar</p>
-<h3 id="配置xml文件"><a href="#配置xml文件" class="headerlink" title="配置xml文件"></a>配置xml文件</h3><figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">&lt;context:annotation-config/&gt;</div><div class="line">    &lt;context:component-scan base-package=<span class="string">"com.shxt"</span>/&gt;</div><div class="line">    &lt;aop:aspectj-autoproxy proxy-target-class=<span class="string">"true"</span>/&gt;</div><div class="line">    &lt;context:property-placeholder location=<span class="string">"classpath:jdbc.properties"</span>/&gt;</div><div class="line">    &lt;!-- 数据源 --&gt;</div><div class="line">    &lt;bean id=<span class="string">"druidDataSource"</span> class=<span class="string">"com.alibaba.druid.pool.DruidDataSource"</span> destroy-method=<span class="string">"close"</span>&gt;</div><div class="line">        &lt;property name=<span class="string">"driverClassName"</span> value=<span class="string">"<span class="variable">$&#123;shxt.driver&#125;</span>"</span>/&gt;</div><div class="line">        &lt;property name=<span class="string">"url"</span> value=<span class="string">"<span class="variable">$&#123;shxt.url&#125;</span>"</span>/&gt;</div><div class="line">        &lt;property name=<span class="string">"username"</span> value=<span class="string">"<span class="variable">$&#123;shxt.username&#125;</span>"</span>/&gt;</div><div class="line">        &lt;property name=<span class="string">"password"</span> value=<span class="string">"<span class="variable">$&#123;shxt.password&#125;</span>"</span>/&gt;</div><div class="line">    &lt;/bean&gt;</div><div class="line">    &lt;!-- JDBCTEMPLATE --&gt;</div><div class="line">    &lt;bean id=<span class="string">"jdbcTemplate"</span> class=<span class="string">"org.springframework.jdbc.core.JdbcTemplate"</span>&gt;</div><div class="line">        &lt;property name=<span class="string">"dataSource"</span> ref=<span class="string">"druidDataSource"</span>&gt;&lt;/property&gt;</div><div class="line">    &lt;/bean&gt;</div></pre></td></tr></table></figure>
-<h2 id="调用jdbcTemplate"><a href="#调用jdbcTemplate" class="headerlink" title="调用jdbcTemplate"></a>调用jdbcTemplate</h2><figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">@Autowired</div><div class="line">   private JdbcTemplate jdbcTemplate;</div><div class="line">   /* (方法重写)</div><div class="line">    * @see com.shxt.dao.UserDao<span class="comment">#ListMap()</span></div><div class="line">    */</div><div class="line">   @Override</div><div class="line">   public List&lt;Map&lt;String, Object&gt;&gt; <span class="function"><span class="title">ListMap</span></span>() &#123;</div><div class="line">       <span class="built_in">return</span> jdbcTemplate.queryForList(SQL);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   /* (方法重写)</div><div class="line">    * @see com.shxt.dao.UserDao<span class="comment">#listUserALL()</span></div><div class="line">    */</div><div class="line">   @Override</div><div class="line">   public List&lt;SysUser&gt; <span class="function"><span class="title">listUserALL</span></span>() &#123;</div><div class="line">       <span class="built_in">return</span> jdbcTemplate.query(SQL, new BeanPropertyRowMapper&lt;SysUser&gt;(SysUser.class));</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<hr>
-<h1 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h1><ul>
-<li>事务管理是企业级应用程序开发中必不可少的技术,  用来确保数据的完整性和一致性. </li>
-<li>事务就是一系列的动作, 它们被当做一个单独的工作单元. 这些动作要么全部完成, 要么全部不起作用</li>
-<li>事务的四个关键属性(ACID)</li>
-</ul>
-<ol>
-<li>原子性(atomicity): 事务是一个原子操作, 由一系列动作组成. 事务的原子性确保动作要么全部完成要么完全不起作用.</li>
-<li>一致性(consistency): 一旦所有事务动作完成, 事务就被提交. 数据和资源就处于一种满足业务规则的一致性状态中.</li>
-<li>隔离性(isolation): 可能有许多事务会同时处理相同的数据, 因此每个事物都应该与其他事务隔离开来, 防止数据损坏.</li>
-<li>持久性(durability): 一旦事务完成, 无论发生什么系统错误, 它的结果都不应该受到影响. 通常情况下, 事务的结果被写到持久化存储器中.</li>
-</ol>
+          配置JDBC配置JAR包jar包为druid.jar
+配置xml文件&lt;context:annotation-config/&gt;    &lt;context:component-scan base-package="com.shxt"/&gt;    &lt;aop:aspectj-aut
+          ...
 
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/05/springJDBC/#more" rel="contents">
+              Weiterlesen &raquo;
+            </a>
+          </div>
         
       
     </div>
